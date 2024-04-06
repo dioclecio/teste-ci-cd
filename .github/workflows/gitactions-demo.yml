@@ -22,7 +22,7 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i"
-          # SOURCE: "dist/"
+          SOURCE: "d../"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
           REMOTE_PORT: ${{ secrets.SSH_PORT}}
@@ -34,5 +34,6 @@ jobs:
             ls -al
           SCRIPT_AFTER: |
             whoami
+            cd ${{ secrets.SSH_TARGET}}
             ls -al
             echo $RSYNC_STDOUT
