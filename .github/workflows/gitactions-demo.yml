@@ -5,6 +5,7 @@ jobs:
   implantando-no-servidor:
     runs-on: ubuntu-latest
     steps:
+#########################################
 #       - name: Install SSH Key
 #         uses: shimataro/ssh-key-action@v2
 #         with:
@@ -16,24 +17,33 @@ jobs:
 #         # run: rsync -avz ./dist/ ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}}:~/teste/ -e 'ssh -p ${{ secrets.SSH_PORT}}'
 #         run: ls -la ./
 
-
-      - name: Deploy to Staging server
-        uses: easingthemes/ssh-deploy@main
+#########################################
+#      - name: Deploy to Staging server
+#        uses: easingthemes/ssh-deploy@main
+#        with:
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          ARGS: "-rlgoDzvc -i"
+#          SOURCE: "/home/runner/work/teste-ci-cd/"
+#          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+#          REMOTE_USER: ${{ secrets.SSH_USER }}
+#          REMOTE_PORT: ${{ secrets.SSH_PORT}}
+#          TARGET: ${{ secrets.SSH_TARGET }}
+#          EXCLUDE: "/dist/, /node_modules/"
+#          SCRIPT_BEFORE: |
+#            whoami
+#            cd ${{ secrets.SSH_TARGET}}
+#            ls -al
+#          SCRIPT_AFTER: |
+#            whoami
+#            cd ${{ secrets.SSH_TARGET}}
+#            ls -al
+#            echo $RSYNC_STDOUT
+      - name: Executa o comando SSH para entrar e fazer o que for necessário
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rlgoDzvc -i"
-          SOURCE: "/home/runner/work/teste-ci-cd/"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          REMOTE_PORT: ${{ secrets.SSH_PORT}}
-          TARGET: ${{ secrets.SSH_TARGET }}
-          EXCLUDE: "/dist/, /node_modules/"
-          SCRIPT_BEFORE: |
-            whoami
-            cd ${{ secrets.SSH_TARGET}}
-            ls -al
-          SCRIPT_AFTER: |
-            whoami
-            cd ${{ secrets.SSH_TARGET}}
-            ls -al
-            echo $RSYNC_STDOUT
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            ls -la
