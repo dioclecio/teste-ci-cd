@@ -1,5 +1,5 @@
 name: implantando-no-servidor
-run-name: ${{ github.actor }} implantando no servidor.
+run-name: Implantando o código no servidor.
 on: [push]
 jobs:
   implantando-no-servidor:
@@ -46,4 +46,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            ls -la
+            cd ${{ secrets.SSH_TARGET}}
+            git pull
