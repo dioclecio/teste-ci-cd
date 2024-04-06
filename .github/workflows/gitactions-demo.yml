@@ -22,7 +22,7 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i"
-          SOURCE: "dist/"
+          # SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
           REMOTE_PORT: ${{ secrets.SSH_PORT}}
@@ -30,6 +30,7 @@ jobs:
           EXCLUDE: "/dist/, /node_modules/"
           SCRIPT_BEFORE: |
             whoami
+            cd ${{ secrets.SSH_TARGET}}
             ls -al
           SCRIPT_AFTER: |
             whoami
