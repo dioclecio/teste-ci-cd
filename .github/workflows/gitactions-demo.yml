@@ -13,4 +13,5 @@ jobs:
         - name: Adding Known Hosts
           run: ssh-keyscan -p 22221 ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         - name: Enviar os arquivos para o destino
-          run: rsync -avz ./dist/ ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}}:~/teste/ -e 'ssh -p ${{ secrets.SSH_PORT}}'
+          # run: rsync -avz ./dist/ ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}}:~/teste/ -e 'ssh -p ${{ secrets.SSH_PORT}}'
+          run: ls -la ./
