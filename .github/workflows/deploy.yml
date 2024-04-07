@@ -1,5 +1,5 @@
 name: implantando-no-servidor
-run-name: Implantando o código no servidor.
+run-name: Implantando o código em servidor local usando Cloudflare.
 on: [push]
 jobs:
   implantando-no-servidor:
@@ -26,7 +26,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          script: |
-            cd "${{ secrets.SSH_TARGET }}"
-            git pull
-            ls -la
+          commands: cd "${{ secrets.SSH_TARGET }}"; git pull; ls -la
