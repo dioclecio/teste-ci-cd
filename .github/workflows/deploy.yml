@@ -26,11 +26,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # port: ${{ secrets.PORT }}
-          commands: cd "${{ secrets.SSH_TARGET }}"; 
-      - name: Desligando o Podman-compose atual
-        run: podman-compose down; sleep 5; 
-      - name: Atualizando a base de arquivos
-        run: git pull;
-      - name: Colocando o serviço no ar novamente 
-        run: podman-compose up -d; ls -la;
+          commands: cd "${{ secrets.SSH_TARGET }}"; podman-compose down; sleep 5; git pull; podman-compose up -d; ls -la;
 
