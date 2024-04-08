@@ -26,9 +26,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # port: ${{ secrets.PORT }}
-          commands: cd "${{ secrets.SSH_TARGET }}"; \
-            podman-compose down; \
-            git pull; \
-            podman-compose up -d; \
-            ls -la;
+          commands: cd "${{ secrets.SSH_TARGET }}"; podman-compose down; sleep 5; git pull; podman-compose up -d; ls -la;
 
