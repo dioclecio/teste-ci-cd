@@ -27,5 +27,4 @@ jobs:
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # port: ${{ secrets.PORT }}
           commands: cd "${{ secrets.SSH_TARGET }}"; git pull 
-      - name: entra com os comandos
           commands: ls -la
